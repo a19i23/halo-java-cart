@@ -1,10 +1,11 @@
 package hautelook;
 
+import org.junit.Assert;
+
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Assert;
 
 
 public class Stepdefs {
@@ -30,13 +31,15 @@ public class Stepdefs {
     @Given("^I have a cart with a \"([^\"]*)\" dollar item named \"([^\"]*)\"$")
     public void iHaveACartWithADollarItemNamed(int itemCost, String productName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    		Item item  = new Item(productName, itemCost);
+    		this.cart.addItemToCart(item);
     }
 
     @Then("^My quantity of products named \"([^\"]*)\" should be \"([^\"]*)\"$")
     public void myQuantityOfProductsNamedShouldBe(String productName, int itemCount) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    		int itemsFound = this.cart.getNumberOfItemsInCartNamed(productName);
+        Assert.assertTrue("Total is " + itemsFound, itemsFound == itemCount);
     }
 
     @When("^I apply a \"([^\"]*)\" percent coupon code$")

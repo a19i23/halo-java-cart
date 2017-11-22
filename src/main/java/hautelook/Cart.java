@@ -25,4 +25,14 @@ public class Cart {
        itemsArray.add(item);
        subtotal += item.getItemPrice();
     }
+    
+    public int getNumberOfItemsInCartNamed(String itemName) {
+    	int quantityOfItemsFoundWithName = 0;
+    		for (Item item : itemsArray) {
+    			if (item.getItemName().equals(itemName)) {
+    				quantityOfItemsFoundWithName++;
+    			}
+    		}
+    		return quantityOfItemsFoundWithName;
+    }
 }
