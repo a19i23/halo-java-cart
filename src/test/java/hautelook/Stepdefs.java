@@ -17,13 +17,14 @@ public class Stepdefs {
 
     @Then("^My subtotal should be \"([^\"]*)\" dollars$")
     public void mySubtotalShouldBeDollars(int subtotal) throws Throwable {
-        Assert.assertTrue("Total is " + this .cart.subtotal(), this.cart.subtotal() == subtotal);
+        Assert.assertTrue("Total is " + this.cart.subtotal(), this.cart.subtotal() == subtotal);
     }
 
     @When("^I add a \"([^\"]*)\" dollar item named \"([^\"]*)\"$")
     public void iAddADollarItemNamed(int itemCost, String productName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        Item item = new Item(productName, itemCost);
+        this.cart.addItemToCart(item);
     }
 
     @Given("^I have a cart with a \"([^\"]*)\" dollar item named \"([^\"]*)\"$")
