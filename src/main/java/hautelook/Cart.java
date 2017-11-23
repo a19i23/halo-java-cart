@@ -6,18 +6,35 @@ import java.util.ArrayList;
  */
 public class Cart {
     private ArrayList<Item> itemsArray;
-    private double subtotal;
+    private int subtotal;
+    private int weightTotal;
 
     public Cart () {
       itemsArray = new ArrayList<Item>();
-      subtotal = 0.0;
+      subtotal = 0;
     }
 
     public double subtotal() {
+    		getTotalWeight();
+    		
+    		//calculate shipping
+    		if (subtotal < 100) {
+    			if (weightTotal < 10) {
+    				subtotal += 5;
+    			} else {
+    				subtotal += itemsArray.size() * 20;
+    			}
+    		}
         return subtotal;
     }
 
-    public ArrayList<Item> getItemsInCart() {
+    private void getTotalWeight() {
+		for (Item item : itemsArray) {
+			weightTotal += item.getItemWeight();
+		}	
+	}
+
+	public ArrayList<Item> getItemsInCart() {
        return itemsArray;
     }
 
@@ -35,4 +52,10 @@ public class Cart {
     		}
     		return quantityOfItemsFoundWithName;
     }
+    
+    public void applyDiscount(int percentDiscount) {
+    		int discountedAmount = subtotal * percentDiscount/100;
+    		subtotal = subtotal - discountedAmount;  		
+    }
+    
 }

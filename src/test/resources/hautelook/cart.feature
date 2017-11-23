@@ -37,7 +37,7 @@ Scenario: Add a 2nd item to a cart after applying a discount
   Then My subtotal should be "10" dollars
   And I apply a "10" percent coupon code
   And I add a "30" dollar item named "dress"
-  Then My subtotal should be "36" dollars
+  Then My subtotal should be "39" dollars
 
 Scenario: When order is under $100, and all items under 10 lb, then shipping is $5 flat
   Given I have an empty cart

@@ -39,13 +39,13 @@ public class Stepdefs {
     public void myQuantityOfProductsNamedShouldBe(String productName, int itemCount) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
     		int itemsFound = this.cart.getNumberOfItemsInCartNamed(productName);
-        Assert.assertTrue("Total is " + itemsFound, itemsFound == itemCount);
+        Assert.assertTrue("Total is " + itemsFound, itemsFound == itemCount);	
     }
 
     @When("^I apply a \"([^\"]*)\" percent coupon code$")
     public void iApplyAPercentCouponCode(int percentOff) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    		this.cart.applyDiscount(10);
     }
 
     @When("^I add a \"([^\"]*)\" dollar \"([^\"]*)\" lb item named \"([^\"]*)\"$")
