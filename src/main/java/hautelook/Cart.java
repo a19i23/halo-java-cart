@@ -8,29 +8,53 @@ public class Cart {
     private ArrayList<Item> itemsArray;
     private int subtotal;
     private int weightTotal;
+    private int numberOfItemsTenPoundsOrMore;
+    private int total;
 
     public Cart () {
       itemsArray = new ArrayList<Item>();
       subtotal = 0;
+      total = 0;
+      weightTotal = 0;
+      numberOfItemsTenPoundsOrMore = 0;   
     }
 
     public double subtotal() {
-    		getTotalWeight();
-    		
-    		//calculate shipping
-    		if (subtotal < 100) {
-    			if (weightTotal < 10) {
-    				subtotal += 5;
-    			} else {
-    				subtotal += itemsArray.size() * 20;
-    			}
-    		}
         return subtotal;
+    }
+    public void calculateShipping() {
+    		getTotalWeight();
+		
+		//calculate shipping
+		if (subtotal < 100) {
+			if (weightTotal < 10) {
+				total = subtotal + 5;	//flat rate $5 shipping
+			} else if (itemsArray.size() != numberOfItemsTenPoundsOrMore){
+				total = subtotal + 5 + numberOfItemsTenPoundsOrMore * 20;
+			} else {
+				total = subtotal + numberOfItemsTenPoundsOrMore * 20;
+			}
+			
+		} else if (subtotal > 100) {
+			if (numberOfItemsTenPoundsOrMore == 0) { 
+				total = subtotal;	//free shipping
+			} else {
+				total = subtotal + numberOfItemsTenPoundsOrMore * 20;
+			}			
+		}
+    }
+    public double total() {		
+		return total;
     }
 
     private void getTotalWeight() {
+    	
 		for (Item item : itemsArray) {
-			weightTotal += item.getItemWeight();
+			int itemWeight = item.getItemWeight();
+			weightTotal += itemWeight;
+			if (itemWeight >=10) {
+				numberOfItemsTenPoundsOrMore++;
+			}
 		}	
 	}
 
