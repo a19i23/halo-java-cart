@@ -17,6 +17,7 @@ public class Stepdefs {
 
     @Then("^My subtotal should be \"([^\"]*)\" dollars$")
     public void mySubtotalShouldBeDollars(int subtotal) throws Throwable {
+    		this.cart.processDiscount();
         Assert.assertTrue("Subtotal is " + this.cart.subtotal(), this.cart.subtotal() == subtotal);
     }
 
@@ -44,7 +45,7 @@ public class Stepdefs {
     @When("^I apply a \"([^\"]*)\" percent coupon code$")
     public void iApplyAPercentCouponCode(int percentOff) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-    		this.cart.applyDiscount(10);
+    		this.cart.applyDiscount(percentOff);
     }
 
     @When("^I add a \"([^\"]*)\" dollar \"([^\"]*)\" lb item named \"([^\"]*)\"$")

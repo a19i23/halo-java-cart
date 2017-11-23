@@ -10,18 +10,30 @@ public class Cart {
     private int weightTotal;
     private int numberOfItemsTenPoundsOrMore;
     private int total;
+    private int discountAmount;
 
     public Cart () {
       itemsArray = new ArrayList<Item>();
       subtotal = 0;
       total = 0;
       weightTotal = 0;
-      numberOfItemsTenPoundsOrMore = 0;   
+      numberOfItemsTenPoundsOrMore = 0;
+      discountAmount = 0;
     }
-
+    public void processDiscount() {
+    	if (discountAmount != 0) {
+			int discountedAmount = subtotal * discountAmount/100;
+    		subtotal = subtotal - discountedAmount;
+		}
+    }
     public double subtotal() {
         return subtotal;
     }
+    
+    public double total() {		
+		return total;
+    }
+    
     public void calculateShipping() {
     		getTotalWeight();
 		
@@ -43,12 +55,8 @@ public class Cart {
 			}			
 		}
     }
-    public double total() {		
-		return total;
-    }
 
-    private void getTotalWeight() {
-    	
+    private void getTotalWeight() {   	
 		for (Item item : itemsArray) {
 			int itemWeight = item.getItemWeight();
 			weightTotal += itemWeight;
@@ -78,8 +86,7 @@ public class Cart {
     }
     
     public void applyDiscount(int percentDiscount) {
-    		int discountedAmount = subtotal * percentDiscount/100;
-    		subtotal = subtotal - discountedAmount;  		
+    		discountAmount = percentDiscount;  		
     }
     
 }
